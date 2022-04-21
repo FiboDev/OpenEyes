@@ -22,9 +22,6 @@ function eliminarRuta() {
 function onLocationFound(e) {
 
     var radius = e.accuracy / 2;
-
-    //var locationMarker = L.marker(e.latlng).addTo(map)
-    //.bindPopup('You are within ' + radius + ' meters from this point').openPopup();
     
     if (!marker) {
 
@@ -70,3 +67,4 @@ map.on('locationfound', onLocationFound);
 
 map.locate({setView: true, watch: true, maxZoom: 17, enableHighAccuracy: true})
 
+crearRuta(11.020815641538876, -74.8518640994371, 11.017643695417679, -74.8504199983654);
