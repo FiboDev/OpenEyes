@@ -24,9 +24,9 @@ app.use(require("./routes/index"));
 app.use(express.static(path.join(__dirname, "public")));
 
 //empezar el servidor
-server.listen(8080, () => {
+server.listen(port, () => {
 
-    console.log("El servidor esta corriendo en el puerto 3000");
+    console.log("El servidor esta corriendo");
 })
 
 
