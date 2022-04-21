@@ -8,6 +8,7 @@ const http = require("http");
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
+const port = process.env.PORT || 3000
 
 //configuraciones 
 app.engine("ejs", engine);
