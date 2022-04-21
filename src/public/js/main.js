@@ -16,7 +16,7 @@ function crearRuta(latitud1, longitud1, latitud2, longitud2) {
 
 function eliminarRuta() {
 
-    map.removeControl();
+    console.log("prueba");
 }
 
 function onLocationFound(e) {
@@ -65,6 +65,6 @@ var locationCircle = L.circle([0,0], 0).addTo(map);
 
 map.on('locationfound', onLocationFound);
 
-map.locate({setView: true, watch: true, maxZoom: 17, enableHighAccuracy: true})
+map.locate({setView: true, watch: true, maxZoom: 16, enableHighAccuracy: true})
 
 crearRuta(11.020815641538876, -74.8518640994371, 11.017643695417679, -74.8504199983654);
