@@ -23,10 +23,27 @@ function onLocationFound(e) {
 
     var radius = e.accuracy / 2;
 
-    var locationMarker = L.marker(e.latlng).addTo(map)
-        .bindPopup('You are within ' + radius + ' meters from this point').openPopup();
+    //var locationMarker = L.marker(e.latlng).addTo(map)
+    //.bindPopup('You are within ' + radius + ' meters from this point').openPopup();
+    
+    if (!marker) {
 
-    var locationCircle = L.circle(e.latlng, radius).addTo(map);
+            marker = L.marker(e.latlng);
+
+        } else {
+
+            marker.setLatLng(e.latlng);
+        }
+
+    if (!locationCircle) {
+        
+        locationCircle = L.circle(e.latlng, radius);
+
+    } else {
+
+        locationCircle.setLatLng(e.latlng);
+        locationCircle.setRadius(radius);
+    }
 }
 
 // Inicializacion del mapa
@@ -45,6 +62,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 var bloques = new Array('bambu1.geojson', 'bambu2.geojson', 'biblioteca.geojson', 'bloqueD.geojson', 'bloqueE.geojson', 'bloqueF.geojson', 'bloqueG.geojson', 'bloqueI1.geojson', 'bloqueI2.geojson', 'bloqueI3.geojson', 'bloqueI4.geojson', 'bloqueJ.geojson', 'bloqueK.geojson', 'bloqueL.geojson', 'cafeDuNord.geojson', 'camion.geojson', 'canchaBaloncesto.geojson', 'canchaTenis.geojson', 'casaEstudio.geojson', 'coliseo.geojson', 'duNordExpress.geojson', 'laEsquina.geojson', 'plaza.geojson', 'puerta7.geojson', 'salasDanza.geojson')
+
+var marker = L.marker([0,0]).addTo(map); 
+var locationCircle = L.circle([0,0], 0).addTo(map);
 
 map.on('locationfound', onLocationFound);
 
