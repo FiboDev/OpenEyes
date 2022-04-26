@@ -36,10 +36,10 @@ function onLocationFound(e) {
 
 // ############################################### speech ###############################################
 
-//var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 var speaker = new SpeechSynthesisUtterance();
+var recognizing = false;
 
 var bloques = ['bloque a',
             'bloque b',
@@ -55,7 +55,7 @@ var bloques = ['bloque a',
             'bloque m',
             'bloque de salud']
 
-var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+var recognition = new SpeechRecognition();
 var voices = window.speechSynthesis.getVoices();
 
 speaker.voice = voices[0]; 
@@ -63,10 +63,14 @@ speaker.voice = voices[0];
 speaker.lang = "es";
 
 recognition.continuous = false;
-recognition.lang = 'en-US';
+recognition.lang = 'es-CO';
 recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 
+recognition.onstart = () => {
+
+    recognizing = true;
+}
 recognition.onresult = (event) => {
 
     var bloque = event.results[0][0].transcript; 
@@ -89,7 +93,7 @@ recognition.onresult = (event) => {
 recognition.onspeechend = () => {
 
     recognition.stop();
-
+    recognizing = false;
 }
 
 
