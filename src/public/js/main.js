@@ -47,6 +47,7 @@ recognition.lang = 'es-CO';
 recognition.onstart = function() {
 
     recognizing = true;
+    final_transcript = '';
 };
 
 recognition.onend = function() {
