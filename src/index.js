@@ -16,6 +16,8 @@ app.set("view engine", "ejs");
 
 app.set("views", path.join(__dirname, "views"));
 
+//socket 
+require("../src/public/js/sockets")(io);
 
 //rutas de la pagina
 app.use(require("./routes/index"));
@@ -28,6 +30,3 @@ server.listen(port, () => {
 
     console.log("El servidor esta corriendo");
 })
-
-
-

@@ -1,51 +1,46 @@
-function crearRuta(latitud1, longitud1, latitud2, longitud2) {
-
-    L.Routing.control({
-    
-        waypoints: [L.latLng(latitud1, longitud1), L.latLng(latitud2, longitud2)],
-        router: L.Routing.graphHopper("71b42389-46b4-4f34-b2bd-ac83be6f0cf6", {
-    
-            urlParameters: {
-                vehicle: "foot"
-            }
-        })
-        
-    }).addTo(map);
-
-}
-
-function eliminarRuta() {
-
-    console.log("prueba");
-}
+import {reconocer, enviarResultado as resultado} from "./speech.js"
+import route from "./route.js"
 
 function onLocationFound(e) {
 
     var radius = e.accuracy / 2;
     
-    if (!marker) {
+    if (!user) {
 
-            marker = L.marker(e.latlng);
+            user = new L.Icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+            });
+
+            L.marker(e.latlng, {icon: user}).addTo(map);
 
         } else {
 
-            marker.setLatLng(e.latlng);
+            user.setLatLng(e.latlng);
         }
 
     if (!locationCircle) {
         
-        locationCircle = L.circle(e.latlng, radius);
+        locationCircle = L.circle(e.latlng, radius).addTo(map);
 
     } else {
 
         locationCircle.setLatLng(e.latlng);
         locationCircle.setRadius(radius);
     }
+
 }
 
-// Inicializacion del mapa
+// Inicializacion del mapa y sus dependencias
 
-var map = L.map("map", {preferCanvas: false, zoom: 19}).setView([11.017318457267693, -74.85047893988772]);
+var map = L.map("map", {preferCanvas: false, zoom: 19}).setView([11.018699961903724, -74.85051655756253]);
+var user;
+var locationCircle;
+var router = new route(map);
 
 //Referencias del mapa con su respectivo copyright y api 
 
@@ -58,13 +53,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     accessToken: 'pk.eyJ1IjoiaWNvZGVydGMiLCJhIjoiY2wxdjdsYm5oMmYycDNqbW9zcjljeGM5ciJ9.Dda3KrTtHyDW_zaKRveTuQ'
 }).addTo(map);
 
-var bloques = new Array('bambu1.geojson', 'bambu2.geojson', 'biblioteca.geojson', 'bloqueD.geojson', 'bloqueE.geojson', 'bloqueF.geojson', 'bloqueG.geojson', 'bloqueI1.geojson', 'bloqueI2.geojson', 'bloqueI3.geojson', 'bloqueI4.geojson', 'bloqueJ.geojson', 'bloqueK.geojson', 'bloqueL.geojson', 'cafeDuNord.geojson', 'camion.geojson', 'canchaBaloncesto.geojson', 'canchaTenis.geojson', 'casaEstudio.geojson', 'coliseo.geojson', 'duNordExpress.geojson', 'laEsquina.geojson', 'plaza.geojson', 'puerta7.geojson', 'salasDanza.geojson')
-
-var marker = L.marker([0,0]).addTo(map); 
-var locationCircle = L.circle([0,0], 0).addTo(map);
-
+map.locate({setView: true, watch: false, maxZoom: 16, enableHighAccuracy: true});
 map.on('locationfound', onLocationFound);
 
-map.locate({setView: true, watch: true, maxZoom: 16, enableHighAccuracy: true})
+window.addEventListener("click", function(event) {
 
-crearRuta(11.020815641538876, -74.8518640994371, 11.017643695417679, -74.8504199983654);
+
+    reconocer();
+    
+
+});
