@@ -58,9 +58,3 @@ map.on('locationfound', onLocationFound);
 
 window.addEventListener("click", reconocer);
 
-window.addEventListener("touchstart", () => {
-
-    const lecture = new SpeechSynthesisUtterance('hello');
-    lecture.volume = 1;
-    speechSynthesis.speak(lecture);
-});

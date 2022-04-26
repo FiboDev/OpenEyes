@@ -69,6 +69,8 @@ export function reconocer() {
     speaker.text = "Por favor, di el lugar al que quieres ir";
     speechSynthesis.speak(speaker);
 
+    alert("ESTOY VIVO")
+
     try {
 
 
