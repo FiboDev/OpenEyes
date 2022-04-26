@@ -58,4 +58,4 @@ map.on('locationfound', onLocationFound);
 
 window.addEventListener("click", reconocer);
 
-window.addEventListener("touchstart", reconocer);
+window.addEventListener("touchstart", () => {alert("NO ME TOQUES PERRA")});
