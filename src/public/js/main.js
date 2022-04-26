@@ -55,19 +55,13 @@ var bloques = ['bloque a',
             'bloque m',
             'bloque de salud']
 
-var grammar = '#JSGF V1.0; grammar bloques; public <bloque> = ' + bloques.join(' | ') + ' ;'
-
 var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
-var speechRecognitionList = new SpeechGrammarList();
 var voices = window.speechSynthesis.getVoices();
 
 speaker.voice = voices[0]; 
 
-speechRecognitionList.addFromString(grammar, 1);
-
 speaker.lang = "es";
 
-recognition.grammars = speechRecognitionList;
 recognition.continuous = false;
 recognition.lang = 'es-CO';
 recognition.interimResults = false;
