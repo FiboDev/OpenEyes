@@ -51,6 +51,8 @@ recognition.onresult = (event) => {
         console.log("EY PEDAZO DE IMBECIL, APRENDE HABLAR");
     }
 
+    alert(bloque)
+
 }
 
 recognition.onspeechend = () => {
