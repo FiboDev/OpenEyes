@@ -40,6 +40,21 @@ var recognition = new webkitSpeechRecognition();
 var recognizing = false 
 var final_transcript = ''
 
+var bloques = ['bloque a',
+            'bloque b',
+            'bloque c',
+            'bloque d',
+            'bloque e',
+            'bloque f',
+            'bloque g',
+            'bloque i',
+            'bloque k',
+            'bloque j',
+            'bloque l',
+            'bloque m',
+            'bloque de salud']
+
+
 recognition.continuous = false;
 recognition.interimResults = false;
 recognition.lang = 'es-CO';
@@ -78,68 +93,25 @@ window.addEventListener("click", (e) => {
 
     recognition.start();
 })
-/*
-var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
-var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+
 var speaker = new SpeechSynthesisUtterance();
-var recognizing = false;
-
-
-var bloques = ['bloque a',
-            'bloque b',
-            'bloque c',
-            'bloque d',
-            'bloque e',
-            'bloque f',
-            'bloque g',
-            'bloque i',
-            'bloque k',
-            'bloque j',
-            'bloque l',
-            'bloque m',
-            'bloque de salud']
-
-var recognition = new SpeechRecognition();
 var voices = window.speechSynthesis.getVoices();
 
 speaker.voice = voices[0]; 
 
 speaker.lang = "es";
+speaker.text = "hola";
+speechSynthesis.speak(speaker);
 
-recognition.continuous = false;
-recognition.lang = 'es-CO';
-recognition.interimResults = false;
-recognition.maxAlternatives = 1;
+/*
+var speaker = new SpeechSynthesisUtterance();
+var voices = window.speechSynthesis.getVoices();
 
-recognition.onstart = () => {
+speaker.voice = voices[0]; 
 
-    recognizing = true;
-}
-recognition.onresult = (event) => {
-
-    var bloque = event.results[0][0].transcript; 
-    
-    console.log(`Confidence: ${event.results[0][0].confidence}`);
-    
-    if (validarDestino(bloque)) {
-
-        router.crearRuta(bloque);
-
-    } else {
-
-        console.log("EY PEDAZO DE IMBECIL, APRENDE HABLAR");
-    }
-
-    alert(bloque)
-
-}
-
-recognition.onspeechend = () => {
-
-    recognition.stop();
-    recognizing = false;
-}
-
+speaker.lang = "es";
+speaker.text = "hola";
+speechSynthesis.speak(speaker);
 
 function reconocer() {
 
