@@ -62,7 +62,7 @@ recognition.onspeechend = () => {
 }
 
 
-export function reconocer() {
+function reconocer() {
 
 
     console.log("escuchando a tus porquerias :D");
