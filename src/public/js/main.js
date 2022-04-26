@@ -36,10 +36,53 @@ function onLocationFound(e) {
 
 // ############################################### speech ###############################################
 
+var recognition = new webkitSpeechRecognition();
+var recognizing = false 
+var final_transcript = ''
+
+recognition.continuous = false;
+recognition.interimResults = false;
+recognition.lang = 'es-CO';
+
+recognition.onstart = function() {
+
+    recognizing = true;
+};
+
+recognition.onend = function() {
+
+    recognizing = false;
+}
+
+recognition.onresult = function(event) {
+
+    var interim_transcript = '';
+
+    for (var i = event.resultIndex; i < event.results.length; ++i) {
+
+        if (event.results[i].isFinal) {
+
+        final_transcript += event.results[i][0].transcript;
+
+        } else {
+
+        interim_transcript += event.results[i][0].transcript;
+        }
+    }
+    
+    alert(final_transcript)
+}
+
+window.addEventListener("click", (e) => {
+
+    recognition.start();
+})
+/*
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 var speaker = new SpeechSynthesisUtterance();
 var recognizing = false;
+
 
 var bloques = ['bloque a',
             'bloque b',
@@ -130,7 +173,7 @@ function validarDestino(destino) {
     return false;
 }
 
-
+*/
 // Inicializacion del mapa y sus dependencias
 
 var map = L.map("map", {preferCanvas: false, zoom: 19}).setView([11.018699961903724, -74.85051655756253]);
@@ -152,5 +195,5 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 map.locate({setView: true, watch: false, maxZoom: 16, enableHighAccuracy: true});
 map.on('locationfound', onLocationFound);
 
-window.addEventListener("click", reconocer);
+//window.addEventListener("click", reconocer);
 
