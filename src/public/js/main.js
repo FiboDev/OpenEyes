@@ -63,7 +63,7 @@ speaker.voice = voices[0];
 speaker.lang = "es";
 
 recognition.continuous = false;
-recognition.lang = 'es-CO';
+recognition.lang = 'en-US';
 recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 
