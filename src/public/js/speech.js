@@ -51,10 +51,6 @@ recognition.onresult = (event) => {
         console.log("EY PEDAZO DE IMBECIL, APRENDE HABLAR");
     }
 
-    alert(bloque);
-    
-    enviarResultado();
-
 }
 
 recognition.onspeechend = () => {
@@ -64,7 +60,7 @@ recognition.onspeechend = () => {
 }
 
 
-export function reconocer() {
+function reconocer() {
 
 
     console.log("escuchando a tus porquerias :D");
@@ -72,8 +68,6 @@ export function reconocer() {
     
     speaker.text = "Por favor, di el lugar al que quieres ir";
     speechSynthesis.speak(speaker);
-
-    sleep(20000);
 
     try {
 
@@ -100,15 +94,5 @@ function validarDestino(destino) {
     return false;
 }
 
-export function enviarResultado() {
-
-
-    return respuesta;
-}
-
-function sleep(ms) {
-
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 
