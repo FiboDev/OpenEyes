@@ -1,4 +1,4 @@
-import {reconocer, enviarResultado as resultado} from "./speech.js"
+import {reconocer} from "./speech.js"
 import route from "./route.js"
 
 function onLocationFound(e) {
