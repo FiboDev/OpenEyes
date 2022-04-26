@@ -56,10 +56,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 map.locate({setView: true, watch: false, maxZoom: 16, enableHighAccuracy: true});
 map.on('locationfound', onLocationFound);
 
-window.addEventListener("click", function(event) {
+window.addEventListener("click", reconocer);
 
-
-    reconocer();
-    
-
-});
+window.addEventListener("touchstart", reconocer);
