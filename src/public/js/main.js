@@ -36,9 +36,16 @@ function onLocationFound(e) {
 
 // ############################################### speech ###############################################
 
-var recognition = new webkitSpeechRecognition();
+/*var recognition = new webkitSpeechRecognition();
 var recognizing = false 
 var final_transcript = ''
+
+var speaker = new SpeechSynthesisUtterance();
+var voices = window.speechSynthesis.getVoices();
+
+speaker.voice = voices[0]; 
+
+speaker.lang = "es";
 
 var bloques = ['bloque a',
             'bloque b',
@@ -52,7 +59,7 @@ var bloques = ['bloque a',
             'bloque j',
             'bloque l',
             'bloque m',
-            'bloque de salud']
+            'bloque de salud'];
 
 
 recognition.continuous = false;
@@ -86,52 +93,27 @@ recognition.onresult = function(event) {
         }
     }
     
-    alert(final_transcript)
+    if (validarDestino(final_transcript.toLowerCase())) {
+
+        router.crearRuta(final_transcript.toLowerCase());
+        speaker.text = "Calculando ruta a " + final_transcript;
+        console.log(`Calculando ruta a ${final_transcript}`)
+
+    } else {
+
+        speaker.text = "Lo siento, no pude entender.";
+        console.log("No se pudo calcular la ruta")
+        
+    }
 }
 
-window.addEventListener("click", (e) => {
+/*window.addEventListener("click", (e) => {
 
     recognition.start();
-})
 
-var speaker = new SpeechSynthesisUtterance();
-var voices = window.speechSynthesis.getVoices();
-
-speaker.voice = voices[0]; 
-
-speaker.lang = "es";
-speaker.text = "hola";
-speechSynthesis.speak(speaker);
-
-/*
-var speaker = new SpeechSynthesisUtterance();
-var voices = window.speechSynthesis.getVoices();
-
-speaker.voice = voices[0]; 
-
-speaker.lang = "es";
-speaker.text = "hola";
-speechSynthesis.speak(speaker);
-
-function reconocer() {
-
-
-    console.log("escuchando a tus porquerias :D");
-    
-    speaker.text = "Por favor, di el lugar al que quieres ir";
+    speaker.text = "¿A dónde quieres ir?";
     speechSynthesis.speak(speaker);
-
-
-    try {
-
-        recognition.start();
-
-    } catch (e) {
-
-        recognition.stop();
-    }
-    
-}
+})*/
 
 function validarDestino(destino) {
 
@@ -146,7 +128,8 @@ function validarDestino(destino) {
     return false;
 }
 
-*/
+
+
 // Inicializacion del mapa y sus dependencias
 
 var map = L.map("map", {preferCanvas: false, zoom: 19}).setView([11.018699961903724, -74.85051655756253]);
@@ -168,5 +151,4 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 map.locate({setView: true, watch: false, maxZoom: 16, enableHighAccuracy: true});
 map.on('locationfound', onLocationFound);
 
-//window.addEventListener("click", reconocer);
 
