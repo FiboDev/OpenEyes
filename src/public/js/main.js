@@ -1,5 +1,28 @@
 import route from "./route.js"
 
+// Inicializacion del mapa y sus dependencias
+
+var map = L.map("map", {preferCanvas: false, zoom: 19}).setView([11.018699961903724, -74.85051655756253]);
+var user;
+var locationCircle;
+var router = new route(map);
+
+//Referencias del mapa con su respectivo copyright y api 
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'pk.eyJ1IjoiaWNvZGVydGMiLCJhIjoiY2wxdjdsYm5oMmYycDNqbW9zcjljeGM5ciJ9.Dda3KrTtHyDW_zaKRveTuQ'
+}).addTo(map);
+
+map.locate({setView: true, watch: true, maxZoom: 16, enableHighAccuracy: true});
+map.on('locationfound', onLocationFound);
+
+
+
 function onLocationFound(e) {
 
     var radius = e.accuracy / 2;
@@ -33,122 +56,3 @@ function onLocationFound(e) {
     }
 
 }
-
-// ############################################### speech ###############################################
-
-/*var recognition = new webkitSpeechRecognition();
-var recognizing = false 
-var final_transcript = ''
-
-var speaker = new SpeechSynthesisUtterance();
-var voices = window.speechSynthesis.getVoices();
-
-speaker.voice = voices[0]; 
-
-speaker.lang = "es";
-
-var bloques = ['bloque a',
-            'bloque b',
-            'bloque c',
-            'bloque d',
-            'bloque e',
-            'bloque f',
-            'bloque g',
-            'bloque i',
-            'bloque k',
-            'bloque j',
-            'bloque l',
-            'bloque m',
-            'bloque de salud'];
-
-
-recognition.continuous = false;
-recognition.interimResults = false;
-recognition.lang = 'es-CO';
-
-recognition.onstart = function() {
-
-    recognizing = true;
-    final_transcript = '';
-};
-
-recognition.onend = function() {
-
-    recognizing = false;
-}
-
-recognition.onresult = function(event) {
-
-    var interim_transcript = '';
-
-    for (var i = event.resultIndex; i < event.results.length; ++i) {
-
-        if (event.results[i].isFinal) {
-
-        final_transcript += event.results[i][0].transcript;
-
-        } else {
-
-        interim_transcript += event.results[i][0].transcript;
-        }
-    }
-    
-    if (validarDestino(final_transcript.toLowerCase())) {
-
-        router.crearRuta(final_transcript.toLowerCase());
-        speaker.text = "Calculando ruta a " + final_transcript;
-        console.log(`Calculando ruta a ${final_transcript}`)
-
-    } else {
-
-        speaker.text = "Lo siento, no pude entender.";
-        console.log("No se pudo calcular la ruta")
-        
-    }
-}
-
-/*window.addEventListener("click", (e) => {
-
-    recognition.start();
-
-    speaker.text = "¿A dónde quieres ir?";
-    speechSynthesis.speak(speaker);
-})*/
-
-function validarDestino(destino) {
-
-    for (var bloque in bloques) {
-
-        if (bloques[bloque].localeCompare(destino) == 0) {
-
-            return true;
-        }
-    }
-
-    return false;
-}
-
-
-
-// Inicializacion del mapa y sus dependencias
-
-var map = L.map("map", {preferCanvas: false, zoom: 19}).setView([11.018699961903724, -74.85051655756253]);
-var user;
-var locationCircle;
-var router = new route(map);
-
-//Referencias del mapa con su respectivo copyright y api 
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoiaWNvZGVydGMiLCJhIjoiY2wxdjdsYm5oMmYycDNqbW9zcjljeGM5ciJ9.Dda3KrTtHyDW_zaKRveTuQ'
-}).addTo(map);
-
-map.locate({setView: true, watch: false, maxZoom: 16, enableHighAccuracy: true});
-map.on('locationfound', onLocationFound);
-
-

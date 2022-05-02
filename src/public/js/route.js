@@ -41,6 +41,8 @@ export default class Route {
 
     obtenerCoordenadas(destino) {
 
+        var ubicaciones;
+        
         
     }
 
