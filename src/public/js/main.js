@@ -18,7 +18,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     accessToken: 'pk.eyJ1IjoiaWNvZGVydGMiLCJhIjoiY2wxdjdsYm5oMmYycDNqbW9zcjljeGM5ciJ9.Dda3KrTtHyDW_zaKRveTuQ'
 }).addTo(map);
 
-map.locate({setView: true, watch: true, maxZoom: 16, enableHighAccuracy: true});
+map.locate({setView: false, watch: true, maxZoom: 16, enableHighAccuracy: true});
 map.on('locationfound', onLocationFound);
 
 
