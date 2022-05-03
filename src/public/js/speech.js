@@ -1,13 +1,7 @@
-var recognition = new webkitSpeechRecognition();
-var recognizing = false 
-var final_transcript = ''
-
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 var speaker = new SpeechSynthesisUtterance();
-var voices = window.speechSynthesis.getVoices();
-
-speaker.voice = voices[0]; 
-
-speaker.lang = "es";
 
 var bloques = ['bloque a',
             'bloque b',
@@ -20,52 +14,74 @@ var bloques = ['bloque a',
             'bloque k',
             'bloque j',
             'bloque l',
-            'bloque salud'];
+            'bloque m',
+            'bloque de salud']
 
+var grammar = '#JSGF V1.0; grammar bloques; public <bloque> = ' + bloques.join(' | ') + ' ;'
+var respuesta = ""
 
+var recognition = new SpeechRecognition();
+var speechRecognitionList = new SpeechGrammarList();
+var voices = window.speechSynthesis.getVoices();
+
+speaker.voice = voices[0]; 
+
+speechRecognitionList.addFromString(grammar, 1);
+
+speaker.lang = "es";
+
+recognition.grammars = speechRecognitionList;
 recognition.continuous = false;
-recognition.interimResults = false;
 recognition.lang = 'es-CO';
+recognition.interimResults = false;
+recognition.maxAlternatives = 1;
 
-recognition.onstart = function() {
+recognition.onresult = (event) => {
 
-    recognizing = true;
-    final_transcript = '';
-};
-
-recognition.onend = function() {
-
-    recognizing = false;
-}
-
-recognition.onresult = function(event) {
-
-    var interim_transcript = '';
-
-    for (var i = event.resultIndex; i < event.results.length; ++i) {
-
-        if (event.results[i].isFinal) {
-
-        final_transcript += event.results[i][0].transcript;
-
-        } else {
-
-        interim_transcript += event.results[i][0].transcript;
-        }
-    }
+    var bloque = event.results[0][0].transcript; 
     
-    if (validarDestino(final_transcript.toLowerCase())) {
+    console.log(`Confidence: ${event.results[0][0].confidence}`);
+    
+    if (validarDestino(bloque)) {
 
-        router.obtenerCoordenadas(final_transcript);
-        speaker.text = "Calculando ruta a " + final_transcript;
-        console.log(`Calculando ruta a ${final_transcript}`)
+        respuesta += bloque
 
     } else {
 
-        speaker.text = "Lo siento, no pude entender.";
-        console.log("No se pudo calcular la ruta")
-        
+        console.log("EY PEDAZO DE IMBECIL, APRENDE HABLAR");
     }
+
+    alert(bloque)
+
+}
+
+recognition.onspeechend = () => {
+
+    recognition.stop();
+
+}
+
+
+function reconocer() {
+
+
+    console.log("escuchando a tus porquerias :D");
+    respuesta = "";
+    
+    speaker.text = "Por favor, di el lugar al que quieres ir";
+    speechSynthesis.speak(speaker);
+
+
+    try {
+
+
+        recognition.start();
+
+    } catch (e) {
+
+        recognition.stop();
+    }
+    
 }
 
 function validarDestino(destino) {
@@ -80,3 +96,6 @@ function validarDestino(destino) {
 
     return false;
 }
+
+
+

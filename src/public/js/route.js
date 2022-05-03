@@ -115,9 +115,7 @@ export default class Route {
 
     obtenerCoordenadas(destino) {
 
-        console.log(this.ubicaciones);
-        
-        
+        ;
     }
 
 
