@@ -2,43 +2,49 @@ import route from "./route.js"
 
 function onLocationFound(e) {
 
-    var radius = e.accuracy / 2;
+    var radio = e.accuracy / 2;
     
-    if (!user) {
+    if (!usuario) {
 
-            user = new L.Icon({
-            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-            shadowSize: [41, 41]
-            });
-
-            L.marker(e.latlng, {icon: user}).addTo(map);
+            usuario = L.marker(e.latlng).addTo(map);
 
         } else {
 
-            user.setLatLng(e.latlng);
+            usuario.setLatLng(e.latlng);
         }
 
-    if (!locationCircle) {
+    if (!usuarioCirculo) {
         
-        locationCircle = L.circle(e.latlng, radius).addTo(map);
+        usuarioCirculo = L.circle(e.latlng, radio).addTo(map);
 
     } else {
 
-        locationCircle.setLatLng(e.latlng);
-        locationCircle.setRadius(radius);
+        usuarioCirculo.setLatLng(e.latlng);
+        usuarioCirculo.setRadius(radio);
     }
+
+}
+
+function coordenadasUsuario() {
+
+    if (typeof usuario !== "undefined") {
+
+        router.obtenerPosicion(usuario.getLatLng());
+
+    } else {
+
+        setTimeout(coordenadasUsuario, 250);
+
+    }
+
 
 }
 
 // Inicializacion del mapa y sus dependencias
 
 var map = L.map("map", {preferCanvas: false, zoom: 19}).setView([11.018699961903724, -74.85051655756253]);
-var user;
-var locationCircle;
+var usuario;
+var usuarioCirculo;
 var router = new route(map);
 
 //Referencias del mapa con su respectivo copyright y api 
@@ -50,9 +56,23 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     tileSize: 512,
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoiaWNvZGVydGMiLCJhIjoiY2wxdjdsYm5oMmYycDNqbW9zcjljeGM5ciJ9.Dda3KrTtHyDW_zaKRveTuQ'
+
 }).addTo(map);
 
-map.locate({setView: true, watch: true, maxZoom: 16, enableHighAccuracy: true});
+map.locate({setView: false, watch: true, maxZoom: 16, enableHighAccuracy: true});
 map.on('locationfound', onLocationFound);
 
 
+coordenadasUsuario();
+//var resultado = router.crearPlan({"lat": 10.981283403233498, "lng": -74.79608863592146}, {"lat": 11.01912778511333, "lng": -74.84953299164772})
+
+var estado = true; 
+
+
+
+
+
+
+
+
+"https://graphhopper.com/api/1/route?point=11.0188,-74.8501&point=11.0196,-74.8497&instructions=true&type=json&key=71b42389-46b4-4f34-b2bd-ac83be6f0cf6&vehicle=foot"
