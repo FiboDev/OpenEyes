@@ -27,16 +27,14 @@ function onLocationFound(e) {
 
 function coordenadasUsuario() {
 
-    if (typeof usuario !== "undefined") {
+    try {
 
         router.obtenerPosicion(usuario.getLatLng());
 
-    } else {
+    } catch (e) {
 
-        setTimeout(coordenadasUsuario, 250);
-
+        console.log("Todavia no esta definido el usuario");
     }
-
 
 }
 
@@ -67,7 +65,6 @@ setTimeout(coordenadasUsuario, 250);
 //var resultado = router.crearPlan({"lat": 10.981283403233498, "lng": -74.79608863592146}, {"lat": 11.01912778511333, "lng": -74.84953299164772})
 
 var estado = true; 
-
 
 
 
