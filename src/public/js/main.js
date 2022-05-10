@@ -11,6 +11,7 @@ function onLocationFound(e) {
         } else {
 
             usuario.setLatLng(e.latlng);
+            router.obtenerCoordenadas(e.latlng);
         }
 
     if (!usuarioCirculo) {
@@ -21,19 +22,6 @@ function onLocationFound(e) {
 
         usuarioCirculo.setLatLng(e.latlng);
         usuarioCirculo.setRadius(radio);
-    }
-
-}
-
-function coordenadasUsuario() {
-
-    try {
-
-        router.obtenerPosicion(usuario.getLatLng());
-
-    } catch (e) {
-
-        console.log("Todavia no esta definido el usuario");
     }
 
 }
@@ -61,14 +49,9 @@ map.locate({setView: false, watch: true, maxZoom: 16, enableHighAccuracy: true})
 map.on('locationfound', onLocationFound);
 
 
-setTimeout(coordenadasUsuario, 250);
 //var resultado = router.crearPlan({"lat": 10.981283403233498, "lng": -74.79608863592146}, {"lat": 11.01912778511333, "lng": -74.84953299164772})
 
 var estado = true; 
-
-
-
-
 
 
 
