@@ -63,7 +63,7 @@ map.locate({setView: false, watch: true, maxZoom: 16, enableHighAccuracy: true})
 map.on('locationfound', onLocationFound);
 
 
-coordenadasUsuario();
+setTimeout(coordenadasUsuario, 250);
 //var resultado = router.crearPlan({"lat": 10.981283403233498, "lng": -74.79608863592146}, {"lat": 11.01912778511333, "lng": -74.84953299164772})
 
 var estado = true; 
