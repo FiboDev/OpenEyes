@@ -148,32 +148,32 @@ export default class Route {
         var instrucciones  = await obtenerRequest();
 
         instrucciones = instrucciones["paths"]["0"]["instructions"];
+
+        var posicion = 0;
         
         var distanciaRecorrida = 0;
         var estado = true;
 
-        for (var puntoReferencia in instrucciones) {
+        var self = this;
 
-            var distancia = instrucciones[puntoReferencia]["distance"];
-            estado = true;
+        function myLoop(actual) {
 
-            while (estado) {
+            setTimeout(function() {
 
-                if (distancia <= distanciaRecorrida) {
+                //distanciaRecorrida = this.calcularDistancia();
 
-                    alert(instrucciones[puntoReferencia]["text"]);
-                    estado = false;
+                //if ((instrucciones[0]["distance"] >= distanciaRecorrida)) {
 
-                } else {
-                    
-                    distanciaRecorrida += this.calcularDistancia();
-                    console.log(distanciaRecorrida)
-                    
-                }
-            }
+                    console.log(instrucciones[0]["text"]);
+                    alert(self.calcularDistancia())
+                //}
 
-            this.ubicacionUsuario = undefined;
+              if (actual) myLoop(actual);   //  decrement i and call myLoop again if i > 0
+            
+            }, 3000)
         }
+
+        myLoop(estado)
 
         
     }
