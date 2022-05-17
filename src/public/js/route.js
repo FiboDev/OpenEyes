@@ -106,21 +106,19 @@ export default class Route {
             ]
     }
 
-    crearPlan(ubicacionUsuario, destino) {
+    crearPlan(destino) {
 
         if (this.rutaActual) this.eliminarRuta();
 
-        var latitudUsuario = ubicacionUsuario["lat"];
-        var longitudUsuario = ubicacionUsuario["lng"];
-
-        this.ubicacionUsuario = ubicacionUsuario;
+        var latitudUsuario = this.ubicacionUsuario["lat"];
+        var longitudUsuario = this.ubicacionUsuario["lng"];
 
         var latitudDestino = destino["lat"];
         var longitudDestino = destino["lng"];
 
         this.crearRuta(latitudUsuario, longitudUsuario, latitudDestino, longitudDestino);
 
-        this.darInstrucciones(ubicacionUsuario, destino);
+        this.darInstrucciones(this.ubicacionUsuario, destino);
 
     }
 
@@ -149,32 +147,39 @@ export default class Route {
 
         var instrucciones  = await obtenerRequest();
 
-        console.log(instrucciones);
-
         instrucciones = instrucciones["paths"]["0"]["instructions"];
-
-        console.log(instrucciones);
         
-        var distanciaRecorrida = 0; 
+        var distanciaRecorrida = 0;
+        var estado = true;
 
         for (var puntoReferencia in instrucciones) {
 
             var distancia = instrucciones[puntoReferencia]["distance"];
+            estado = true;
 
-            while (distancia <= distanciaRecorrida) {
+            while (estado) {
 
-                distanciaRecorrida += this.calcularDistancia();
+                if (distancia <= distanciaRecorrida) {
 
+                    alert(instrucciones[puntoReferencia]["text"]);
+                    estado = false;
+
+                } else {
+                    
+                    distanciaRecorrida += this.calcularDistancia();
+                    console.log(distanciaRecorrida)
+                    
+                }
             }
 
-            distanciaRecorrida = 0;
-            console.log(instrucciones[puntoReferencia]["text"]);
-
+            this.ubicacionUsuario = undefined;
         }
+
+        
     }
 
     calcularDistancia() {
-
+        
         return L.GeometryUtil.distance(this.map, this.ubicacionUsuario, this.coordenadasActual);
         
     }
@@ -182,7 +187,12 @@ export default class Route {
     obtenerPosicion(coordenadas) {
 
         this.coordenadasActual = coordenadas;
-        alert(this.coordenadasActual);
+
+        if (typeof this.ubicacionUsuario === "undefined") {
+
+            this.ubicacionUsuario = coordenadas;
+        }
+
     }
 
     eliminarRuta() {

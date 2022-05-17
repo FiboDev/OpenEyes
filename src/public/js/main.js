@@ -11,7 +11,7 @@ function onLocationFound(e) {
         } else {
 
             usuario.setLatLng(e.latlng);
-            router.obtenerCoordenadas(e.latlng);
+            router.obtenerPosicion(e.latlng);
         }
 
     if (!usuarioCirculo) {
@@ -48,10 +48,14 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 map.locate({setView: false, watch: true, maxZoom: 16, enableHighAccuracy: true});
 map.on('locationfound', onLocationFound);
 
+var destino = router.obtenerCoordenadas("bloque i");
 
-//var resultado = router.crearPlan({"lat": 10.981283403233498, "lng": -74.79608863592146}, {"lat": 11.01912778511333, "lng": -74.84953299164772})
+window.addEventListener("click", function() {
 
-var estado = true; 
+    router.obtenerPosicion(usuario.getLatLng());
+    router.crearPlan(destino);
+});
+
 
 
 
