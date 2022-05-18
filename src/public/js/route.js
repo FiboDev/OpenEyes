@@ -158,7 +158,7 @@ export default class Route {
 
         alert(instrucciones[0]["text"])
 
-        function myLoop(pos) {
+        function myLoop() {
 
             setTimeout(function() {
 
@@ -167,18 +167,28 @@ export default class Route {
                 if ((instrucciones[posicion]["distance"] < distanciaRecorrida)) {
 
                     alert(instrucciones[posicion]["text"]);
+
+                    self.ubicacionUsuario = undefined; 
+
                     posicion++;
                     
                 }
 
+                if (posicion > instrucciones.length) {
+
+                    estado = false;
+                    clearInterval(myLoop);
+                    self.eliminarRuta();
+                } 
+
                 console.log(distanciaRecorrida)
 
-              if (estado) myLoop(estado);   //  decrement i and call myLoop again if i > 0
+              if (estado) myLoop();   //  decrement i and call myLoop again if i > 0
             
             }, 3000)
         }
 
-        myLoop(estado)
+        myLoop();
 
         
     }
