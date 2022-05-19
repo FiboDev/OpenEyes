@@ -108,7 +108,7 @@ export default class Route {
 
     crearPlan(destino) {
 
-        if (this.rutaActual) this.eliminarRuta();
+        this.eliminarRuta();
 
         var latitudUsuario = this.ubicacionUsuario["lat"];
         var longitudUsuario = this.ubicacionUsuario["lng"];
@@ -130,7 +130,8 @@ export default class Route {
             router: L.Routing.graphHopper("71b42389-46b4-4f34-b2bd-ac83be6f0cf6", {
         
                 urlParameters: {
-                    vehicle: "foot"
+                    vehicle: "foot",
+                    instructions: false
                 }
             })
             
@@ -217,6 +218,7 @@ export default class Route {
             if (layer.options.waypoints && layer.options.waypoints.length) {
 
                 this.map.removeLayer(layer);
+                console.log(layer)
             }
         });
     }

@@ -1,6 +1,27 @@
 import route from "./route.js"
 
-function onLocationFound(e) {
+// Inicializacion del mapa y sus dependencias
+
+var map = L.map("map", {preferCanvas: false, zoom: 19}).setView([11.018699961903724, -74.85051655756253]);
+var usuario;
+var usuarioCirculo;
+var router = new route(map);
+
+//Referencias del mapa con su respectivo copyright y api 
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'pk.eyJ1IjoiaWNvZGVydGMiLCJhIjoiY2wxdjdsYm5oMmYycDNqbW9zcjljeGM5ciJ9.Dda3KrTtHyDW_zaKRveTuQ'
+
+}).addTo(map);
+
+map.locate({setView: false, watch: true, maxZoom: 16, enableHighAccuracy: true});
+
+map.on('locationfound', function (e) {
 
     var radio = e.accuracy / 2;
     
@@ -24,29 +45,7 @@ function onLocationFound(e) {
         usuarioCirculo.setRadius(radio);
     }
 
-}
-
-// Inicializacion del mapa y sus dependencias
-
-var map = L.map("map", {preferCanvas: false, zoom: 19}).setView([11.018699961903724, -74.85051655756253]);
-var usuario;
-var usuarioCirculo;
-var router = new route(map);
-
-//Referencias del mapa con su respectivo copyright y api 
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoiaWNvZGVydGMiLCJhIjoiY2wxdjdsYm5oMmYycDNqbW9zcjljeGM5ciJ9.Dda3KrTtHyDW_zaKRveTuQ'
-
-}).addTo(map);
-
-map.locate({setView: false, watch: true, maxZoom: 16, enableHighAccuracy: true});
-map.on('locationfound', onLocationFound);
+});
 
 var destino = router.obtenerCoordenadas("bloque i");
 
