@@ -32,7 +32,7 @@ map.on('locationfound', function (e) {
         } else {
 
             usuario.setLatLng(e.latlng);
-            router.obtenerPosicion(e.latlng);
+            router.actualizarPosicion(e.latlng);
         }
 
     if (!usuarioCirculo) {
@@ -49,10 +49,18 @@ map.on('locationfound', function (e) {
 
 var destino = router.obtenerCoordenadas("bloque i");
 
-window.addEventListener("click", function() {
+let canvas = document.querySelector("#canvas");
 
-    router.obtenerPosicion(usuario.getLatLng());
-    router.crearPlan(destino);
+window.addEventListener("click", async function() {
+
+    /*router.actualizarPosicion(usuario.getLatLng());
+    router.crearPlan(destino);*/ 
+
+    let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+
+    canvas.getContext('2d').drawImage(stream, 0, 0, canvas.width, canvas.height);
+
+    console.log(canvas.toDataURL('image/jpeg'))
 });
 
 

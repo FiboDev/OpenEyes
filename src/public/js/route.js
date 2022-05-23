@@ -159,7 +159,7 @@ export default class Route {
 
         alert(instrucciones[0]["text"])
 
-        function myLoop() {
+        function orientador() {
 
             setTimeout(function() {
 
@@ -178,18 +178,18 @@ export default class Route {
                 if (posicion > instrucciones.length) {
 
                     estado = false;
-                    clearInterval(myLoop);
+                    clearInterval(orientador);
                     self.eliminarRuta();
                 } 
 
                 console.log(distanciaRecorrida)
 
-              if (estado) myLoop();   //  decrement i and call myLoop again if i > 0
+                if (estado) orientador();
             
             }, 3000)
         }
 
-        myLoop();
+        orientador();
 
         
     }
@@ -200,7 +200,7 @@ export default class Route {
         
     }
 
-    obtenerPosicion(coordenadas) {
+    actualizarPosicion(coordenadas) {
 
         this.coordenadasActual = coordenadas;
 

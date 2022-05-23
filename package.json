@@ -13,6 +13,7 @@
   "dependencies": {
     "ejs-mate": "^3.0.0",
     "express": "^4.17.3",
+    "python-shell": "^3.0.1",
     "socket.io": "^4.4.1"
   },
   "devDependencies": {
