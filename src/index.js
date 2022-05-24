@@ -3,7 +3,7 @@ const engine = require("ejs-mate");
 const path = require("path");
 const socketIO = require("socket.io");
 const http = require("http");
-const python = require("python-shell");
+const parser = require("body-parser");
 
 //inicializacion de la app
 const app = express();
@@ -14,6 +14,9 @@ const port = process.env.PORT || 3000
 //configuraciones 
 app.engine("ejs", engine);
 app.set("view engine", "ejs");
+
+app.use(parser.json({limit: '100mb'}));
+app.use(parser.urlencoded({ extended: true }));
 
 app.set("views", path.join(__dirname, "views"));
 
@@ -31,26 +34,3 @@ server.listen(port, () => {
 
     console.log("El servidor esta corriendo");
 })
-
-
-async function pxd() {
-
-    return new Promise((resolve, reject) => {
-
-        python.PythonShell.run("src/public/python/prueba.py", null, (err, results) => {
-
-            return resolve(results);
-        });
-    }).then((res) => {
-
-        console.log(res)
-    })
-}
-
-async function mostrar() {
-
-    await pxd();
-
-}
-
-mostrar()

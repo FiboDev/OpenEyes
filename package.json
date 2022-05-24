@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
     "ejs-mate": "^3.0.0",
     "express": "^4.17.3",
     "python-shell": "^3.0.1",

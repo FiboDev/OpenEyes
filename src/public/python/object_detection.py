@@ -1,4 +1,6 @@
 import cv2 
+import json
+from collections import Counter
 
 class Detector:
     
@@ -12,7 +14,7 @@ class Detector:
 
         #obtener los nombres de las clases de objetos a clasificar
 
-        with open("classes.txt", "r") as archivo: 
+        with open("src/public/python/classes.txt", "r") as archivo: 
         
             self._clases = [nombre_clase.strip() for nombre_clase in archivo.readlines()]
 
@@ -25,12 +27,19 @@ class Detector:
         
         return f"Modelo de YOLOv4 con parametros de confiabilidad de {self.CONF_THRESHOLD} y supresion no maxima de {self.NMS_THRESHOLD}"
     
-    def obtener_objetos(self, clases: list) -> list: 
+    def obtener_objetos(self, clases: list) -> json: 
         
         """
         Devuelve la cantidad de objetos de cada clase detectado
         """
         
+        objetos = []
+        
+        for clase in clases: 
+            
+            objetos.append(self._clases[clase]) 
+        
+        return json.dumps(Counter(objetos))
     
     @property 
     def clases(self) -> list:
@@ -41,7 +50,7 @@ class Detector:
     def modelo(self):
         
         #configuracion inicial del modelo YOLO
-        red = cv2.dnn.readNet('yolov4-tiny.weights', 'yolov4-tiny.cfg')
+        red = cv2.dnn.readNet('src/public/python/yolov4-tiny.weights', 'src/public/python/yolov4-tiny.cfg')
         red.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
         red.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA_FP16)
 

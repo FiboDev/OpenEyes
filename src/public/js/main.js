@@ -6,6 +6,19 @@ var map = L.map("map", {preferCanvas: false, zoom: 19}).setView([11.018699961903
 var usuario;
 var usuarioCirculo;
 var router = new route(map);
+var xhr = new XMLHttpRequest();
+
+xhr.open("POST", "/image", true);
+xhr.setRequestHeader('Content-Type', 'application/json');
+
+Webcam.set({
+
+    width: 320,
+    height: 320,
+    image_format: 'jpg',
+    jpeg_quality: 90
+
+    });
 
 //Referencias del mapa con su respectivo copyright y api 
 
@@ -49,18 +62,31 @@ map.on('locationfound', function (e) {
 
 var destino = router.obtenerCoordenadas("bloque i");
 
-let canvas = document.querySelector("#canvas");
+var boton = document.getElementById("foto");
+
+boton.addEventListener("click", function() {
+
+    Webcam.snap(function(data_uri) {
+        
+        xhr.open("POST", "/image", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        var dato = JSON.stringify({"url": data_uri.slice(22,)});
+
+        xhr.send(dato);
+
+    });
+
+    
+
+})
 
 window.addEventListener("click", async function() {
 
     /*router.actualizarPosicion(usuario.getLatLng());
     router.crearPlan(destino);*/ 
 
-    let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-
-    canvas.getContext('2d').drawImage(stream, 0, 0, canvas.width, canvas.height);
-
-    console.log(canvas.toDataURL('image/jpeg'))
+    Webcam.attach("#cam");
 });
 
 
