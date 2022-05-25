@@ -17,20 +17,22 @@ router.post("/image", async (req, res) => {
 
             if (err) return console.log(err);
 
-            console.log('Hello World > helloworld.txt');
+            console.log('Imagen creada');
 
             });
         
-            await new Promise(resolve => setTimeout(resolve, 3000));
+            //await new Promise(resolve => setTimeout(resolve, 3000));
 
             python.PythonShell.run("src/public/python/object_tracking.py", null, function (err, results) {
 
                 if (err) throw err; 
 
-                console.log(results)
-            })
+                console.log(results);
 
-        
+                res.send(results);
+
+                
+            })
     
     }
 

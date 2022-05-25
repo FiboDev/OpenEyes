@@ -11,6 +11,15 @@ var xhr = new XMLHttpRequest();
 xhr.open("POST", "/image", true);
 xhr.setRequestHeader('Content-Type', 'application/json');
 
+xhr.onreadystatechange = () => {
+
+    if (xhr.readyState == 4 && xhr.status == 200) {
+
+        alert(xhr.responseText);
+    }
+
+};
+
 Webcam.set({
 
     width: 320,
@@ -77,9 +86,10 @@ boton.addEventListener("click", function() {
 
     });
 
-    
+    Webcam.reset();
 
 })
+
 
 window.addEventListener("click", async function() {
 
