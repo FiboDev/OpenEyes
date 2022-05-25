@@ -1,12 +1,51 @@
 import route from "./route.js"
 
-// Inicializacion del mapa y sus dependencias
+// ################ inicializaciones ################ //
 
 var map = L.map("map", {preferCanvas: false, zoom: 19}).setView([11.018699961903724, -74.85051655756253]);
 var usuario;
 var usuarioCirculo;
 var router = new route(map);
 var xhr = new XMLHttpRequest();
+var recognition = new (window.webkitSpeechRecognition || window.SpeechRecognition)();
+
+// ################################################# //
+
+// ################ configuraciones ################ //
+
+// ---------------- speech ---------------- // 
+
+var bloque = "";
+
+recognition.continuous = false;
+recognition.lang = 'es-CO';
+recognition.maxAlternatives = 1;
+recognition.interimResults = false;
+
+
+recognition.onspeechend = function() {
+
+    console.log("Fin de la grabacion")
+    recognition.stop();
+}
+
+recognition.onresult = function(event) {
+
+    bloque = event.results[0][0].transcript; 
+    
+    console.log("Audio detectado");
+    console.log(`Confidence: ${event.results[0][0].confidence}`);
+
+    alert(bloque)
+}
+
+recognition.onerror = (event) => {
+
+    console.log(event.error)
+}
+
+
+// ---------------- request ---------------- //
 
 xhr.open("POST", "/image", true);
 xhr.setRequestHeader('Content-Type', 'application/json');
@@ -15,10 +54,15 @@ xhr.onreadystatechange = () => {
 
     if (xhr.readyState == 4 && xhr.status == 200) {
 
-        alert(xhr.responseText);
+        var respuesta = JSON.parse(xhr.responseText);
+        
+        console.log(respuesta);
     }
 
 };
+
+
+// ---------------- Webcam ---------------- //
 
 Webcam.set({
 
@@ -29,7 +73,7 @@ Webcam.set({
 
     });
 
-//Referencias del mapa con su respectivo copyright y api 
+// ---------------- mapa ---------------- //
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -69,6 +113,8 @@ map.on('locationfound', function (e) {
 
 });
 
+// ################################################# //
+
 var destino = router.obtenerCoordenadas("bloque i");
 
 var boton = document.getElementById("foto");
@@ -91,13 +137,16 @@ boton.addEventListener("click", function() {
 })
 
 
-window.addEventListener("click", async function() {
+window.addEventListener("click", () => {
 
-    /*router.actualizarPosicion(usuario.getLatLng());
-    router.crearPlan(destino);*/ 
+        recognition.start();
 
-    Webcam.attach("#cam");
-});
+        
+        
+        //router.actualizarPosicion(usuario.getLatLng());
+        //router.crearPlan(destino); 
+        Webcam.attach("#cam");
+    });
 
 
 

@@ -20,8 +20,6 @@ router.post("/image", async (req, res) => {
             console.log('Imagen creada');
 
             });
-        
-            //await new Promise(resolve => setTimeout(resolve, 3000));
 
             python.PythonShell.run("src/public/python/object_tracking.py", null, function (err, results) {
 
@@ -29,7 +27,7 @@ router.post("/image", async (req, res) => {
 
                 console.log(results);
 
-                res.send(results);
+                res.send(results[0]);
 
                 
             })
