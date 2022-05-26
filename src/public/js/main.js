@@ -140,8 +140,6 @@ boton.addEventListener("click", function() {
 window.addEventListener("click", () => {
 
         recognition.start();
-
-        
         
         //router.actualizarPosicion(usuario.getLatLng());
         //router.crearPlan(destino); 

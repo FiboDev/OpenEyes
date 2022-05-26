@@ -8,6 +8,11 @@ router.get("/", (req, res) => {
     res.render("index");
 });
 
+router.get("/prueba", (req, res) => {
+
+    res.send("hola");
+})
+
 router.post("/image", async (req, res) => {
 
     
