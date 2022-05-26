@@ -12,7 +12,7 @@ const server = http.createServer(app);
 const io = socketIO(server);
 const port = process.env.PORT || 3000
 
-const package_python = 'opencv-python';
+const package_python = 'opencv-python-headless';
 
 let options = {
     
