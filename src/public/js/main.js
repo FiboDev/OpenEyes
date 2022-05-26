@@ -144,7 +144,7 @@ window.addEventListener("click", () => {
         
         //router.actualizarPosicion(usuario.getLatLng());
         //router.crearPlan(destino); 
-        //Webcam.attach("#cam");
+        Webcam.attach("#cam");
 
         contador++; 
 
