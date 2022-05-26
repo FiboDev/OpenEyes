@@ -4,12 +4,28 @@ const path = require("path");
 const socketIO = require("socket.io");
 const http = require("http");
 const parser = require("body-parser");
+const { PythonShell } = require("python-shell");
 
 //inicializacion de la app
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 const port = process.env.PORT || 3000
+
+const package_python = 'opencv-python';
+
+let options = {
+    
+    args: [package_python]
+};
+
+PythonShell.run("src/public/python/install_dependendecies.py", options, (err, res) => {
+
+        if (err) throw err; 
+
+        else console.log(res);
+
+});
 
 //configuraciones 
 app.engine("ejs", engine);
