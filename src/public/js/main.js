@@ -123,7 +123,7 @@ boton.addEventListener("click", function() {
 
     Webcam.snap(function(data_uri) {
         
-        xhr.open("POST", "/image", true);
+        xhr.open("POST", "blindaigps.herokuapp.com/image", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
 
         var dato = JSON.stringify({"url": data_uri.slice(22,)});
