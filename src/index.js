@@ -12,21 +12,6 @@ const server = http.createServer(app);
 const io = socketIO(server);
 const port = process.env.PORT || 3000
 
-const package_python = 'opencv-python-headless';
-
-let options = {
-    
-    args: [package_python]
-};
-
-PythonShell.run("src/public/python/install_dependendecies.py", options, (err, res) => {
-
-        if (err) throw err; 
-
-        else console.log(res);
-
-});
-
 //configuraciones 
 app.engine("ejs", engine);
 app.set("view engine", "ejs");
