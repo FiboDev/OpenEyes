@@ -57,7 +57,7 @@ xhr.onreadystatechange = () => {
 
         var respuesta = JSON.parse(xhr.responseText);
         
-        console.log(respuesta);
+        alert(respuesta);
     }
 
 };
@@ -143,7 +143,7 @@ window.addEventListener("click", () => {
         //recognition.start();
         
         router.actualizarPosicion(usuario.getLatLng());
-        router.crearPlan(destino); 
+        //router.crearPlan(destino); 
         Webcam.attach("#cam");
 
         contador++; 
