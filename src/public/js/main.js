@@ -142,8 +142,8 @@ window.addEventListener("click", () => {
 
         //recognition.start();
         
-        //router.actualizarPosicion(usuario.getLatLng());
-        //router.crearPlan(destino); 
+        router.actualizarPosicion(usuario.getLatLng());
+        router.crearPlan(destino); 
         Webcam.attach("#cam");
 
         contador++; 
