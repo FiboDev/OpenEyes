@@ -57,7 +57,7 @@ xhr.onreadystatechange = () => {
 
         var respuesta = JSON.parse(xhr.responseText);
         
-        alert(respuesta);
+        alert(JSON.stringify(respuesta));
     }
 
 };
