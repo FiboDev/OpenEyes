@@ -40,6 +40,18 @@
         <script src ="/js/route.js" type = "module"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script src="/js/main.js" type = "module"></script>
+        <script>
+            Webcam.set({
+
+                width: 320,
+                height: 320,
+                image_format: 'jpg',
+                jpeg_quality: 90
+            
+                });
+                
+            Webcam.attach("#cam");
+        </script>
 
         
 

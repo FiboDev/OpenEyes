@@ -98,7 +98,6 @@ map.on('locationfound', function (e) {
 
 // ################################################# //
 
-Webcam.attach("#cam");
 /*window.addEventListener("click", () => {
 
         //recognition.start();
