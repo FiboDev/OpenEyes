@@ -4,7 +4,6 @@ const path = require("path");
 const socketIO = require("socket.io");
 const http = require("http");
 const parser = require("body-parser");
-const { PythonShell } = require("python-shell");
 
 //inicializacion de la app
 const app = express();

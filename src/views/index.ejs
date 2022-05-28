@@ -17,9 +17,18 @@
 
     <body>
 
-        <div id="map"></div>
+        <div id="map-container">
+
+            <div id="menu"></div>
+            <div id="map" onclick="MostrarMenu()"></div>
+            
+        </div>
+
+        
+
         <div id="cam" style="display:none;"></div>
-        <button id="foto">tomar foto</button>
+        
+        <script src="/js/clickmanager.js"></script>
         <script src="/js/webcam.min.js"></script>
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>

@@ -9,6 +9,7 @@ var router = new route(map);
 var xhr = new XMLHttpRequest();
 var recognition = new (window.webkitSpeechRecognition || window.SpeechRecognition)();
 var contador = 0;
+var boton = document.getElementById("menu");
 
 // ################################################# //
 
@@ -114,31 +115,15 @@ map.on('locationfound', function (e) {
 
 });
 
+function xd() {
+
+    console.log("xd javascript ta fino");
+}
+
 // ################################################# //
 
-var destino = router.obtenerCoordenadas("bloque i");
 
-var boton = document.getElementById("foto");
-
-boton.addEventListener("click", function() {
-
-    Webcam.snap(function(data_uri) {
-        
-        xhr.open("POST", "/image", true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-
-        var dato = JSON.stringify({"url": data_uri.slice(22,)});
-
-        xhr.send(dato);
-
-    });
-
-    Webcam.reset();
-
-})
-
-
-window.addEventListener("click", () => {
+/*window.addEventListener("click", () => {
 
         //recognition.start();
         
@@ -149,7 +134,21 @@ window.addEventListener("click", () => {
         contador++; 
 
         console.log(contador);
-    });
+
+        Webcam.snap(function(data_uri) {
+        
+            xhr.open("POST", "/image", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+    
+            var dato = JSON.stringify({"url": data_uri.slice(22,)});
+    
+            xhr.send(dato);
+    
+        });
+    
+        Webcam.reset();
+
+    });*/
 
 
 
