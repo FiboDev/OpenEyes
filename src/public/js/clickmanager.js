@@ -2,6 +2,10 @@ const menu = document.getElementById("menu");
 const speaker = new SpeechSynthesisUtterance();
 var clicks = 0;
 
+menu.addEventListener("click",() => {
+    clicks++;
+});
+
 // Funcion de bienvenida a la app para el usuario.
 function MostrarMenu() {
 
@@ -14,23 +18,17 @@ function MostrarMenu() {
     window.speechSynthesis.speak(speaker);
 
     setTimeout(() => {
-        menu.addEventListener("click",() => {
-            clicks++;
-        });
-    }, 500);
-
-    setTimeout(() => {
         menu.classList.remove("active");
-        menu.removeEventListener("click",() => {
-            clicks++;
-        });
-        console.log(clicks);
+
+        console.log(clicks - 1);
+        EjecutarAccion()
     }, 3000);
 
-    return;
 }
 
 function EjecutarAccion() {
+
+    clicks = clicks - 1;
     
     switch (clicks) {
         
