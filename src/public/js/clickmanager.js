@@ -27,10 +27,6 @@ function MostrarMenu() {
 }
 
 function EjecutarAccion() {
-
-    clicks = clicks - 1;
-
-    alert(clicks);
     
     switch (clicks) {
         
@@ -51,7 +47,15 @@ function EjecutarAccion() {
             
                     var respuesta = JSON.parse(xhr.responseText);
                     
-                    alert(JSON.stringify(respuesta));
+                    let texto = "A tu alrededor hay ";
+
+                    for (var objeto in respuesta) {
+
+                        texto += `${respuesta[objeto]} ${objeto}`;
+                    }
+
+                    speaker.text = texto;
+                    window.speechSynthesis.speak(speaker);
                 }
             
             };
