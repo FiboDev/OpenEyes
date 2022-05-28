@@ -54,6 +54,8 @@ Webcam.set({
     jpeg_quality: 90
 
     });
+    
+Webcam.attach("#cam");
 
 // ---------------- mapa ---------------- //
 
