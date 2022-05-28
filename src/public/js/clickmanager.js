@@ -13,7 +13,7 @@ function MostrarMenu() {
     menu.classList.add("active");
 
     //Ejecutar codigo de audio
-    speaker.text = "Bienvenido a nuestro GPS. Toca la pantalla 1 vez para acceder al menu de rutas,\
+    speaker.text = "Bienvenido a nuestro GPS. Toca la pantalla una vez para acceder al menu de rutas,\
                     2 veces para detectar objetos o 3 veces para conocer tu ubicación actual";
     window.speechSynthesis.speak(speaker);
 
@@ -29,6 +29,8 @@ function MostrarMenu() {
 function EjecutarAccion() {
 
     clicks = clicks - 1;
+
+    alert(clicks);
     
     switch (clicks) {
         
