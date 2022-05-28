@@ -21,8 +21,8 @@ function MostrarMenu() {
         menu.classList.remove("active");
 
         console.log(clicks - 1);
-        EjecutarAccion()
-    }, 3000);
+        EjecutarAccion();
+    }, 13000);
 
 }
 
@@ -34,21 +34,37 @@ function EjecutarAccion() {
         
         case 1:
             
-            console.log("el usuario quiere pene");
+            console.log("rutas");
             break;
 
         case 2:
+
+            var xhr = new XMLHttpRequest();
+
+            reconocer(xhr);
+
+            xhr.onreadystatechange = () => {
+
+                if (xhr.readyState == 4 && xhr.status == 200) {
             
-            console.log("edgar es trapito");
+                    var respuesta = JSON.parse(xhr.responseText);
+                    
+                    alert(JSON.stringify(respuesta));
+                }
+            
+            };
+
+            console.log("reconcocimiento");
             break;
 
         case 3:
             
-            console.log("rubens tiene xuxa");
+            console.log("ubicacion actual");
             break;
 
         default:
-            console.log("oprime esas bainas bien caremonda :D");
+            
+            console.log("error");
         }
 
     clicks = 0;

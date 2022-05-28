@@ -8,8 +8,6 @@ var usuarioCirculo;
 var router = new route(map);
 var xhr = new XMLHttpRequest();
 var recognition = new (window.webkitSpeechRecognition || window.SpeechRecognition)();
-var contador = 0;
-var boton = document.getElementById("menu");
 
 // ################################################# //
 
@@ -115,14 +113,10 @@ map.on('locationfound', function (e) {
 
 });
 
-function xd() {
-
-    console.log("xd javascript ta fino");
-}
 
 // ################################################# //
 
-
+Webcam.attach("#cam");
 /*window.addEventListener("click", () => {
 
         //recognition.start();
@@ -135,18 +129,7 @@ function xd() {
 
         console.log(contador);
 
-        Webcam.snap(function(data_uri) {
         
-            xhr.open("POST", "/image", true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-    
-            var dato = JSON.stringify({"url": data_uri.slice(22,)});
-    
-            xhr.send(dato);
-    
-        });
-    
-        Webcam.reset();
 
     });*/
 
