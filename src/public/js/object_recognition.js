@@ -11,5 +11,4 @@ function reconocer(xhr) {
 
     });
 
-    Webcam.reset();
 }

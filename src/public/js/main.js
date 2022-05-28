@@ -44,24 +44,6 @@ recognition.onerror = (event) => {
     console.log(event.error)
 }
 
-
-// ---------------- request ---------------- //
-
-xhr.open("POST", "/image", true);
-xhr.setRequestHeader('Content-Type', 'application/json');
-
-xhr.onreadystatechange = () => {
-
-    if (xhr.readyState == 4 && xhr.status == 200) {
-
-        var respuesta = JSON.parse(xhr.responseText);
-        
-        alert(JSON.stringify(respuesta));
-    }
-
-};
-
-
 // ---------------- Webcam ---------------- //
 
 Webcam.set({
