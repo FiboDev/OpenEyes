@@ -1,4 +1,4 @@
-export default class Route {
+class Route {
 
     constructor(map) {
 
@@ -106,7 +106,7 @@ export default class Route {
             ]
     }
 
-    crearPlan(destino) {
+    crearPlan(destino, speaker) {
 
         this.eliminarRuta();
 
@@ -118,7 +118,7 @@ export default class Route {
 
         this.crearRuta(latitudUsuario, longitudUsuario, latitudDestino, longitudDestino);
 
-        this.darInstrucciones(this.ubicacionUsuario, destino);
+        this.darInstrucciones(this.ubicacionUsuario, destino, speaker);
 
     }
 
@@ -139,7 +139,7 @@ export default class Route {
     
     }
 
-    async darInstrucciones(ubicacionUsuario, destino) {
+    async darInstrucciones(ubicacionUsuario, destino, speaker) {
 
         async function obtenerRequest() {
 
@@ -157,7 +157,8 @@ export default class Route {
 
         var self = this;
 
-        alert(instrucciones[0]["text"])
+        speaker.text = instrucciones[0]["text"];
+        window.speechSynthesis.speak(speaker);
 
         function orientador() {
 
@@ -167,7 +168,8 @@ export default class Route {
 
                 if ((instrucciones[posicion]["distance"] < distanciaRecorrida)) {
 
-                    alert(instrucciones[posicion]["text"]);
+                    speaker.text = instrucciones[posicion]["text"];
+                    window.speechSynthesis.speak(speaker);
 
                     self.ubicacionUsuario = undefined; 
 
@@ -180,6 +182,8 @@ export default class Route {
                     estado = false;
                     clearInterval(orientador);
                     self.eliminarRuta();
+
+                    document.getElementById("map").setAttribute("onclick","MostrarMenu()");
                 } 
 
                 console.log(distanciaRecorrida)
@@ -223,17 +227,14 @@ export default class Route {
         });
     }
 
-    posicionActual(latitud, longitud) {
+    posicionActual(latitud, longitud, speaker) {
 
         var limite1 = L.latLng(11.019671743304457, -74.85006318239753);
         var limite2 = L.latLng(11.019774252799353, -74.84944780776422);
 
         var area = L.latLngBounds(limite1, limite2).contains(L.latLng(latitud, longitud));
 
-        if (area) { 
-
-            console.log("Te encuentras en el bloque G");
-        }
+        
     }
 
     obtenerCoordenadas(destino) {
@@ -250,6 +251,18 @@ export default class Route {
         }
     }
 
+    validarDestino(bloque) {
+
+        for (let destino in this.ubicaciones) {
+
+            if (bloque.localeCompare(Object.keys(this.ubicaciones[destino])[0]) == 0) {
+
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 }
 

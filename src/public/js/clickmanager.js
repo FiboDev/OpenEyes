@@ -1,3 +1,4 @@
+const mapa = document.getElementById("map");
 const menu = document.getElementById("menu");
 const speaker = new SpeechSynthesisUtterance();
 var clicks = 0;
@@ -20,7 +21,6 @@ function MostrarMenu() {
     setTimeout(() => {
         menu.classList.remove("active");
 
-        console.log(clicks - 1);
         EjecutarAccion();
     }, 13000);
 
@@ -32,6 +32,52 @@ function EjecutarAccion() {
         
         case 1:
             
+            speaker.text = "Por favor, indica el bloque al que quieres ir";
+            window.speechSynthesis.speak(speaker);
+
+
+            recognition.start();
+
+            var bloque = "";
+
+            recognition.onspeechend = function() {
+
+                console.log("Fin de la grabacion")
+                recognition.stop();
+            }
+            
+            recognition.onresult = function(event) {
+            
+                bloque = event.results[0][0].transcript; 
+                
+                console.log("Audio detectado");
+                console.log(bloque);
+                console.log(`Confidence: ${event.results[0][0].confidence}`);
+
+                
+                if (router.validarDestino(bloque)) {
+
+                    let destino = router.obtenerCoordenadas(bloque);
+
+                    router.actualizarPosicion(usuario.getLatLng());
+                    router.crearPlan(destino, speaker);
+                    
+                    mapa.setAttribute("onclick","");
+
+                } else {
+
+                    speaker.text = "El bloque no existe";
+                    window.speechSynthesis.speak(speaker);
+
+                }
+                
+            }
+            
+            recognition.onerror = (event) => {
+            
+                console.log(event.error)
+            }
+
             console.log("rutas");
             break;
 
@@ -65,12 +111,14 @@ function EjecutarAccion() {
 
         case 3:
             
+            router.posicionActual(usuario.getLatLng()["lat"], usuario.getLatLng()["lng"], speaker);
             console.log("ubicacion actual");
             break;
 
         default:
             
-            console.log("error");
+            speaker.text = "Lo sentimos. Intenta de nuevo";
+            window.speechSynthesis.speak(speaker);
         }
 
     clicks = 0;

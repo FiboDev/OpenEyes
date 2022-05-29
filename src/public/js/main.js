@@ -1,12 +1,9 @@
-import route from "./route.js"
-
 // ################ inicializaciones ################ //
 
 var map = L.map("map", {preferCanvas: false, zoom: 19}).setView([11.018699961903724, -74.85051655756253]);
 var usuario;
 var usuarioCirculo;
-var router = new route(map);
-var xhr = new XMLHttpRequest();
+var router = new Route(map);
 var recognition = new (window.webkitSpeechRecognition || window.SpeechRecognition)();
 
 // ################################################# //
@@ -15,34 +12,11 @@ var recognition = new (window.webkitSpeechRecognition || window.SpeechRecognitio
 
 // ---------------- speech ---------------- // 
 
-var bloque = "";
-
 recognition.continuous = false;
 recognition.lang = 'es';
 recognition.maxAlternatives = 1;
 recognition.interimResults = false;
 
-
-recognition.onspeechend = function() {
-
-    console.log("Fin de la grabacion")
-    recognition.stop();
-}
-
-recognition.onresult = function(event) {
-
-    bloque = event.results[0][0].transcript; 
-    
-    console.log("Audio detectado");
-    console.log(`Confidence: ${event.results[0][0].confidence}`);
-
-    alert(bloque)
-}
-
-recognition.onerror = (event) => {
-
-    console.log(event.error)
-}
 
 // ---------------- Webcam ---------------- //
 
@@ -99,24 +73,5 @@ map.on('locationfound', function (e) {
 
 
 // ################################################# //
-
-/*window.addEventListener("click", () => {
-
-        //recognition.start();
-        
-        router.actualizarPosicion(usuario.getLatLng());
-        //router.crearPlan(destino); 
-        Webcam.attach("#cam");
-
-        contador++; 
-
-        console.log(contador);
-
-        
-
-    });*/
-
-
-
 
 "https://graphhopper.com/api/1/route?point=11.0188,-74.8501&point=11.0196,-74.8497&instructions=true&type=json&key=71b42389-46b4-4f34-b2bd-ac83be6f0cf6&vehicle=foot"
