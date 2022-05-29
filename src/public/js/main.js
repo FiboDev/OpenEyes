@@ -17,6 +17,9 @@ recognition.lang = 'es';
 recognition.maxAlternatives = 1;
 recognition.interimResults = false;
 
+recognition.start();
+recognition.stop();
+
 
 // ---------------- Webcam ---------------- //
 
