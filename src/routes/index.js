@@ -35,7 +35,18 @@ router.post("/image", async (req, res) => {
                 res.send(results[0]);
 
                 
-            })
+            });
+
+            python.PythonShell.run("src/public/python/text_detection.py", null, function (err, results) {
+
+                if (err) throw err; 
+
+                console.log(results);
+
+                res.send(results[0]);
+
+                
+            });
     
     }
 
