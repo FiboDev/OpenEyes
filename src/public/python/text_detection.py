@@ -5,7 +5,7 @@ import pytesseract
 pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 
 
-img = cv2.imread("src/public/python/texto.jpg")
+img = cv2.imread("src/public/python/imagen.jpg")
 
 gray = cv2.cvtColor(img, 6)
 
