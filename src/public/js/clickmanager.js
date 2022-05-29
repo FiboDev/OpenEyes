@@ -93,16 +93,25 @@ function EjecutarAccion() {
             
                     var respuesta = JSON.parse(xhr.responseText);
                     
-                    let texto = "A tu alrededor hay ";
+                    if (Object.keys(respuesta).length != 0) {
 
-                    for (var objeto in respuesta) {
+                        let texto = "A tu alrededor hay ";
 
-                        texto += `${respuesta[objeto]} ${objeto}`;
+                        for (var objeto in respuesta) {
+
+                            texto += `${respuesta[objeto]} ${objeto}`;
+                        }
+
+                        speaker.text = texto;
+                        window.speechSynthesis.speak(speaker);
+
+                    } else {
+
+                        speaker.text = "No pude detectar nada. Intenta de nuevo";
+                        window.speechSynthesis.speak(speaker);
                     }
-
-                    speaker.text = texto;
-                    window.speechSynthesis.speak(speaker);
                 }
+                    
             
             };
 

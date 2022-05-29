@@ -183,7 +183,7 @@ class Route {
                     clearInterval(orientador);
                     self.eliminarRuta();
 
-                    document.getElementById("map").setAttribute("onclick","MostrarMenu()");
+                    location.reload();
                 } 
 
                 console.log(distanciaRecorrida)
