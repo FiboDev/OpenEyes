@@ -7,8 +7,6 @@ pytesseract.pytesseract.tesseract_cmd = "/app/.apt/usr/bin/tesseract"
 
 img = cv2.imread("src/public/python/imagen.jpg")
 
-'''
-
 gray = cv2.cvtColor(img, 6)
 
 ret, thresh1 = cv2.threshold(gray, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)
@@ -20,6 +18,7 @@ dilation = cv2.dilate(thresh1, rect_kernel, iterations = 1)
 contours, hierarchy = cv2.findContours(dilation, cv2.RETR_EXTERNAL,
 												cv2.CHAIN_APPROX_NONE)
 
+'''
 im2 = img.copy()
 
 
