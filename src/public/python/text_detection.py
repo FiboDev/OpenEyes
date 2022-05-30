@@ -1,9 +1,13 @@
 # Import required packages
 import cv2		
 import pytesseract
+import os.path as path
 
-pytesseract.pytesseract.tesseract_cmd = "/app/vendor/tesseract-ocr/bin/tesseract"
+#pytesseract.pytesseract.tesseract_cmd = "/app/vendor/tesseract-ocr/bin/tesseract"
 
+print(path.exists("/app/.apt/usr/bin/tesseract"))
+
+'''
 img = cv2.imread("src/public/python/imagen.jpg")
 
 gray = cv2.cvtColor(img, 6)
@@ -30,3 +34,4 @@ for cnt in contours:
 	text = pytesseract.image_to_string(cropped)
 	
 	print(text)
+'''
