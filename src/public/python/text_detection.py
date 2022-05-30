@@ -2,7 +2,7 @@
 import cv2		
 import pytesseract
 
-pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
+pytesseract.pytesseract.tesseract_cmd = '../../app/.apt/usr/bin/tesseract'
 
 
 img = cv2.imread("src/public/python/imagen.jpg")
