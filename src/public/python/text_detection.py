@@ -18,18 +18,14 @@ dilation = cv2.dilate(thresh1, rect_kernel, iterations = 1)
 contours, hierarchy = cv2.findContours(dilation, cv2.RETR_EXTERNAL,
 												cv2.CHAIN_APPROX_NONE)
 
-'''
-im2 = img.copy()
-
-
 for cnt in contours:
     
 	x, y, w, h = cv2.boundingRect(cnt)
 	
 	rect = cv2.rectangle(im2, (x, y), (x + w, y + h), (0, 255, 0), 2)
-	cropped = im2[y:y + h, x:x + w]
+	cropped = img[y:y + h, x:x + w]
 
-	text = pytesseract.image_to_string(cropped)
+	#text = pytesseract.image_to_string(cropped)
 	
-	print(text)
-'''
+	#print(text)
+
