@@ -76,5 +76,3 @@ map.on('locationfound', function (e) {
 
 
 // ################################################# //
-
-"https://graphhopper.com/api/1/route?point=11.0188,-74.8501&point=11.0196,-74.8497&instructions=true&type=json&key=71b42389-46b4-4f34-b2bd-ac83be6f0cf6&vehicle=foot"

@@ -227,14 +227,30 @@ class Route {
         });
     }
 
-    posicionActual(latitud, longitud, speaker) {
+    posicionActual(latitud, longitud, speaker, bloques) {
 
-        var limite1 = L.latLng(11.019671743304457, -74.85006318239753);
-        var limite2 = L.latLng(11.019774252799353, -74.84944780776422);
+        if (L.latLngBounds(L.latLng(bloques["uninorte"][0][1], bloques["uninorte"][0][0]), L.latLng(bloques["uninorte"][1][1], bloques["uninorte"][1][0])).contains(L.latLng(latitud, longitud))) {
 
-        var area = L.latLngBounds(limite1, limite2).contains(L.latLng(latitud, longitud));
+            for (var bloque in bloques) {
 
-        
+                var limite1 = L.latLng(bloques[bloque][0][1], bloques[bloque][0][0]);
+                var limite2 = L.latLng(bloques[bloque][1][1], bloques[bloque][1][0]);
+
+                if (L.latLngBounds(limite1, limite2).contains(L.latLng(latitud, longitud))) {
+
+                    speaker.text = `Te encuentras en ${bloque}`;
+                    window.speechSynthesis.speak(speaker);
+
+                    break;
+                }
+            }
+
+        } else {
+
+            speaker.text = "No estas en uninorte";
+            window.speechSynthesis.speak(speaker);
+        }
+
     }
 
     obtenerCoordenadas(destino) {

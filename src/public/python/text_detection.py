@@ -2,7 +2,8 @@
 import cv2		
 import pytesseract
 
-pytesseract.pytesseract.tesseract_cmd = "/app/.apt/usr/bin/tesseract"
+#Inserta la ruta del archivo del tesseract en tu ordenador.
+pytesseract.pytesseract.tesseract_cmd = "C:/Program Files/Tesseract-OCR/tesseract.exe"
 
 
 img = cv2.imread("src/public/python/imagen.jpg")
@@ -27,5 +28,5 @@ for cnt in contours:
 
 	text = pytesseract.image_to_string(cropped)
 	
-	#print(text)
+	print(text)
 

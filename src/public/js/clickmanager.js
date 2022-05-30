@@ -120,7 +120,26 @@ function EjecutarAccion() {
 
         case 3:
             
-            router.posicionActual(usuario.getLatLng()["lat"], usuario.getLatLng()["lng"], speaker);
+            var xhr = new XMLHttpRequest();
+
+            var bloques;
+
+            xhr.open("GET", "/js/bloques.json", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.send(); 
+
+            xhr.onreadystatechange = () => {
+
+                if (xhr.readyState == 4 && xhr.status == 200) {
+
+                    bloques = JSON.parse(xhr.responseText);
+
+                    router.posicionActual(usuario.getLatLng()["lat"], usuario.getLatLng()["lng"], speaker, bloques);
+
+                }
+            }
+
             console.log("ubicacion actual");
             break;
 
