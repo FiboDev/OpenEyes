@@ -5,7 +5,7 @@ import os.path as path
 
 #pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 
-print(path.exists("/app/.apt/usr/bin/tesseract"))
+print(path.exists("/app/vendor/tesseract-ocr/bin/tesseract"))
 
 '''
 img = cv2.imread("src/public/python/imagen.jpg")
