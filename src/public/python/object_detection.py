@@ -37,7 +37,13 @@ class Detector:
         
         for clase in clases: 
             
-            objetos.append(self._clases[clase]) 
+            try: 
+                
+                objetos.append(self._clases[clase])
+                
+            except: 
+                
+                print("error") 
         
         return json.dumps(Counter(objetos))
     
