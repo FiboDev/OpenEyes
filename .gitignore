@@ -1,0 +1,8 @@
+# modulos de node 
+./node_modules
+
+# archivos vscode 
+./vscode
+
+# archivos de heroku 
+Procfile 
