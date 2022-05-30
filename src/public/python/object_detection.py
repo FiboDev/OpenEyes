@@ -41,9 +41,9 @@ class Detector:
                 
                 objetos.append(self._clases[clase])
                 
-            except: 
+            except IndexError: 
                 
-                print("error") 
+                print(f"Ha ocurrido un error de index")
         
         return json.dumps(Counter(objetos))
     

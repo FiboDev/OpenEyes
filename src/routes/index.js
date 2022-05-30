@@ -26,7 +26,7 @@ router.post("/image", async (req, res) => {
 
             });
 
-            python.PythonShell.run("src/public/python/object_tracking.py", null, function (err, results) {
+            python.PythonShell.run("src/public/python/main.py", {args: "r"}, function (err, results) {
 
                 if (err) throw err; 
 
@@ -38,6 +38,30 @@ router.post("/image", async (req, res) => {
             });
     
     }
+});
+
+router.post("/text", (req, res) => {
+
+    if (req.body["url"].length != 0) {
+
+        fs.writeFile('src/public/python/texto.jpg', req.body["url"], "base64", function (err) {
+
+            if (err) return console.log(err);
+
+            console.log('Imagen creada');
+
+            });
+
+            python.PythonShell.run("src/public/python/main.py", {args: "t"}, function (err, results) {
+
+                if (err) throw err; 
+
+                console.log(results);
+
+                res.send(results);
+
+            });
+        }
 });
 
 

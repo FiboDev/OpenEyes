@@ -15,14 +15,16 @@ function MostrarMenu() {
 
     //Ejecutar codigo de audio
     speaker.text = "Bienvenido a nuestro GPS. Toca la pantalla una vez para acceder al menu de rutas,\
-                    2 veces para detectar objetos o 3 veces para conocer tu ubicación actual";
+                    2 veces para detectar objetos, 3 veces para conocer tu ubicación actual o 4 veces \
+                    para reconocer texto.";
+
     window.speechSynthesis.speak(speaker);
 
     setTimeout(() => {
         menu.classList.remove("active");
 
         EjecutarAccion();
-    }, 13000);
+    }, 16000);
 
 }
 
@@ -85,7 +87,7 @@ function EjecutarAccion() {
 
             var xhr = new XMLHttpRequest();
 
-            reconocer(xhr);
+            reconocer(xhr, true);
 
             xhr.onreadystatechange = () => {
 
@@ -141,6 +143,38 @@ function EjecutarAccion() {
             }
 
             console.log("ubicacion actual");
+            break;
+        
+        case 4:
+
+            var xhr = new XMLHttpRequest();
+
+            reconocer(xhr, false);
+
+            xhr.onreadystatechange = () => {
+
+                if (xhr.readyState == 4 && xhr.status == 200) {
+            
+                    var respuesta = xhr.responseText;
+                    
+                    if (!(respuesta.localeCompare("") == 0)) {
+
+                        let texto = `Esto es lo que pude detectar ${respuesta}`;
+
+                        speaker.text = texto;
+                        window.speechSynthesis.speak(speaker);
+
+                    } else {
+
+                        speaker.text = "No pude detectar nada. Intenta de nuevo";
+                        window.speechSynthesis.speak(speaker);
+                    }
+                }
+                    
+            
+            };
+
+            console.log("texto");
             break;
 
         default:

@@ -1,14 +1,30 @@
-function reconocer(xhr) {
+function reconocer(xhr, modo) {
 
-    xhr.open("POST", "/image", true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
+    if (modo) {
 
-    Webcam.snap(function(data_uri) {
+        xhr.open("POST", "/image", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+    
+        Webcam.snap(function(data_uri) {
+    
+            var dato = JSON.stringify({"url": data_uri.slice(22,)});
+    
+            xhr.send(dato);
+    
+        });
 
-        var dato = JSON.stringify({"url": data_uri.slice(22,)});
+    } else {
 
-        xhr.send(dato);
-
-    });
+        xhr.open("POST", "/text", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+    
+        Webcam.snap(function(data_uri) {
+    
+            var dato = JSON.stringify({"url": data_uri.slice(22,)});
+    
+            xhr.send(dato);
+    
+        });
+    }
 
 }
