@@ -10,10 +10,11 @@ What OpenEye does (functional requeriments)
 3. Get list of objects in user's surroundings.
 4. Recognise text on books, letters and more.
 
-[OpenEye](https://blindaigps.herokuapp.com/) is an initiative to promote inclusivity with respect to people with visual disabilities, so that they do not feel alienated at the Universidad del Norte.
+## Demo
+This is a [demo](https://blindaigps.herokuapp.com/).
 
 ## Description
-The OpenEye is a project to promote and help people with perception difficulties who cannot identify people, objects, spaces, etc. visually, and who have difficulty reading texts that do not have adequate typography,
+[OpenEye](https://blindaigps.herokuapp.com/) is an initiative to promote inclusivity with respect to people with visual disabilities, so that they do not feel alienated at the Universidad del Norte. The OpenEye is a project to promote and help people with perception difficulties who cannot identify people, objects, spaces, etc. visually, and who have difficulty reading texts that do not have adequate typography,
 
 ## Installation
 
