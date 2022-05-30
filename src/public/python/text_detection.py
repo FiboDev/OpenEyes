@@ -25,7 +25,7 @@ for cnt in contours:
 	rect = cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
 	cropped = img[y:y + h, x:x + w]
 
-	#text = pytesseract.image_to_string(cropped)
+	text = pytesseract.image_to_string(cropped)
 	
 	#print(text)
 
