@@ -1,11 +1,8 @@
 # Import required packages
 import cv2		
 import pytesseract
-import os.path as path
 
-#pytesseract.pytesseract.tesseract_cmd = "/app/vendor/tesseract-ocr/bin/tesseract"
-
-print(path.exists("/app/.apt/usr/bin/tesseract"))
+pytesseract.pytesseract.tesseract_cmd = "/app/.apt/usr/bin/tesseract"
 
 '''
 img = cv2.imread("src/public/python/imagen.jpg")
