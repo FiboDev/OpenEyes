@@ -30,14 +30,15 @@ function MostrarMenu() {
 
 function EjecutarAccion() {
     
+    //manejar la cantidad de clicks
     switch (clicks) {
-        
+        //opcion de rutas para ir a cierto bloque
         case 1:
             
             speaker.text = "Por favor, indica el bloque al que quieres ir";
             window.speechSynthesis.speak(speaker);
 
-
+            //detectar el audio del usuario
             recognition.start();
 
             var bloque = "";
@@ -56,7 +57,7 @@ function EjecutarAccion() {
                 console.log(bloque);
                 console.log(`Confidence: ${event.results[0][0].confidence}`);
 
-                
+                //validar que el bloque ingresado por el usuario sea correcto
                 if (router.validarDestino(bloque)) {
 
                     let destino = router.obtenerCoordenadas(bloque);
@@ -82,9 +83,10 @@ function EjecutarAccion() {
 
             console.log("rutas");
             break;
-
+        
+        //detectar objetos
         case 2:
-
+            
             var xhr = new XMLHttpRequest();
 
             reconocer(xhr, true);
@@ -119,7 +121,8 @@ function EjecutarAccion() {
 
             console.log("reconcocimiento");
             break;
-
+        
+        //obtener tu ubicacion actual en la universidad
         case 3:
             
             var xhr = new XMLHttpRequest();
@@ -145,6 +148,7 @@ function EjecutarAccion() {
             console.log("ubicacion actual");
             break;
         
+        //detectar texto
         case 4:
 
             var xhr = new XMLHttpRequest();
