@@ -1,6 +1,8 @@
 ![image](https://user-images.githubusercontent.com/84251099/171055617-0ee90cc0-5b90-416c-803d-6dbdffe5fd4f.png)
 
-![image](https://img.shields.io/badge/python-3.10-blue)
+![image](https://img.shields.io/badge/python-3.10-blue) ![image](https://img.shields.io/badge/open--cv--headless-4.5.5.64-blue) ![image](https://img.shields.io/badge/test-passing-green)
+
+-----------------------------------------------------
 
 # Overview
 
