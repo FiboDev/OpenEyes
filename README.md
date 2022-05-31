@@ -22,7 +22,7 @@ What OpenEye does (functional requeriments)
 We've deployed the app on heroku for [demo](https://blindaigps.herokuapp.com/). It may take up to 10 seconds to load.
 
 ## Description
-[OpenEye](https://blindaigps.herokuapp.com/) is an initiative to promote inclusivity with respect to people with visual disabilities, so that they do not feel alienated at the Universidad del Norte. The OpenEye is a project to promote and help people with perception difficulties who cannot identify people, objects, spaces, etc. visually, and who have difficulty reading texts that do not have adequate typography,
+[OpenEye](https://blindaigps.herokuapp.com/) is an initiative to promote inclusivity with respect to people with visual disabilities, so that they do not feel alienated at the Universidad del Norte. The OpenEye is a project to promote and help people with perception difficulties who cannot identify people, objects, spaces, etc. visually, and who have difficulty reading texts that do not have adequate typography.
 
 ## Installation
 
